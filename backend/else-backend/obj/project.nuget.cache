@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "yDTnSI9K/8U=",
+  "success": true,
+  "projectFilePath": "/Users/emmaspitz/Documents/Skola/ITHS/dotNetCloud/design-cloud-solutions/repo/ELSE-labb/backend/else-backend/else-backend.csproj",
+  "expectedPackageFiles": [
+    "/Users/emmaspitz/.nuget/packages/microsoft.aspnetcore.openapi/10.0.3/microsoft.aspnetcore.openapi.10.0.3.nupkg.sha512",
+    "/Users/emmaspitz/.nuget/packages/microsoft.openapi/2.0.0/microsoft.openapi.2.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
