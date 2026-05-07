@@ -1,4 +1,4 @@
-import "../../css/LoginPage.module.css";
+import styles from "../../css/LoginPage.module.css";
 
 const LoginPage = () => {
   return (
@@ -11,6 +11,7 @@ const LoginPage = () => {
         <input />
         <label>Password</label>
         <input />
+        <button className={styles.btn}>Login</button>
       </form>
     </section>
   );
