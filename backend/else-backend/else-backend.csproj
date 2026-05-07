@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>else_backend</RootNamespace>
+    <UserSecretsId>4f57b5a4-13b9-43e7-b835-517edbd855d5</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
