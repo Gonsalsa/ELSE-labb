@@ -14,6 +14,8 @@ namespace else_backend.Data
         }
 
         public DbSet<TodoItem> todoItems => Set<TodoItem>();
+        public DbSet<User> Users => Set<User>();
+
 
 
     }
