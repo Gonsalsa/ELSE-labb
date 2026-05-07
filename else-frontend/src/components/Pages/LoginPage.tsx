@@ -1,9 +1,9 @@
-import "../../css/LoginPage.module.css";
+import styles from "../../css/LoginPage.module.css";
 
 const LoginPage = () => {
   return (
     <section>
-      <div className="title">
+      <div>
         <h1>Login</h1>
       </div>
       <form>
@@ -11,6 +11,7 @@ const LoginPage = () => {
         <input />
         <label>Password</label>
         <input />
+        <button className={styles.loginButton}>Login</button>
       </form>
     </section>
   );
