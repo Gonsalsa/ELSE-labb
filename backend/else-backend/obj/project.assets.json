@@ -83,25 +83,31 @@
     ]
   },
   "packageFolders": {
-    "/Users/emmaspitz/.nuget/packages/": {}
+    "C:\\Users\\Amnel\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/emmaspitz/Documents/Skola/ITHS/dotNetCloud/design-cloud-solutions/repo/ELSE-labb/backend/else-backend/else-backend.csproj",
+      "projectUniqueName": "C:\\Programmering\\ELSE\\ELSE-labb\\backend\\else-backend\\else-backend.csproj",
       "projectName": "else-backend",
-      "projectPath": "/Users/emmaspitz/Documents/Skola/ITHS/dotNetCloud/design-cloud-solutions/repo/ELSE-labb/backend/else-backend/else-backend.csproj",
-      "packagesPath": "/Users/emmaspitz/.nuget/packages/",
-      "outputPath": "/Users/emmaspitz/Documents/Skola/ITHS/dotNetCloud/design-cloud-solutions/repo/ELSE-labb/backend/else-backend/obj/",
+      "projectPath": "C:\\Programmering\\ELSE\\ELSE-labb\\backend\\else-backend\\else-backend.csproj",
+      "packagesPath": "C:\\Users\\Amnel\\.nuget\\packages\\",
+      "outputPath": "C:\\Programmering\\ELSE\\ELSE-labb\\backend\\else-backend\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/Users/emmaspitz/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Amnel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
       ],
       "sources": {
-        "/usr/local/share/dotnet/library-packs": {},
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -120,7 +126,7 @@
         "auditLevel": "low",
         "auditMode": "all"
       },
-      "SdkAnalysisLevel": "10.0.100"
+      "SdkAnalysisLevel": "10.0.200"
     },
     "frameworks": {
       "net10.0": {
@@ -150,7 +156,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.103/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.AspNetCore": "(,10.0.32767]",
           "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",
