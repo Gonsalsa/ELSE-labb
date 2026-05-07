@@ -1,0 +1,19 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  place-items: center;
+}
+input {
+  width: 12em;
+  background-color: #fffdf9;
+  border-radius: 10px;
+  height: 1.5em;
+}
+h1 {
+  margin: 1em;
+  color: #c8a44d;
+  letter-spacing: 4px;
+  text-align: center;
+  font-size: 50px;
+}
