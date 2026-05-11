@@ -1,6 +1,8 @@
 import styles from "../../css/LoginPage.module.css";
+import GetUsers from "../../services/UserService";
 
 const LoginPage = () => {
+  GetUsers();
   return (
     <section>
       <div>
