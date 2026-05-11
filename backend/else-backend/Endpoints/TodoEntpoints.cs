@@ -19,6 +19,8 @@ namespace else_backend.Endpoints
             return Results.Ok(todo);
         }
 
+        //Create todo
+
         private static async Task<IResult> CreatTodo(TodoItem todo, AppDbContext db)
         {
             db.todoItems.Add(todo);
