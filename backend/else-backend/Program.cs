@@ -17,9 +17,10 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-app.UseCors(options => options.AllowAnyOrigin()
-                                .AllowAnyHeader()
-                                .AllowAnyMethod());
+app.UseCors(options => 
+    options.AllowAnyOrigin()
+    .AllowAnyHeader()
+    .AllowAnyMethod());
 
 app.UseSwagger();
 app.UseSwaggerUI();
