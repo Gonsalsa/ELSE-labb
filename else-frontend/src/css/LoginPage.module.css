@@ -1,0 +1,32 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  place-items: center;
+}
+input {
+  width: 12em;
+  background-color: #fffdf9;
+  border-radius: 10px;
+  height: 1.5em;
+}
+h1 {
+  margin: 1.1em;
+  color: #c8a44d;
+  letter-spacing: 4px;
+  text-align: center;
+  font-size: 50px;
+}
+.loginButton {
+  margin-top: 1.2rem;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #d4af37, #f1d27a);
+  width: 7em;
+  height: 2em;
+}
+.loginButton:hover {
+  background: linear-gradient(135deg, #e1c15b, #f8ebc3);
+  border-color: rgba(212, 175, 55, 0.55);
+  box-shadow: 0 10px 28px rgba(212, 175, 55, 0.18);
+  transform: translateY(-2px);
+}
