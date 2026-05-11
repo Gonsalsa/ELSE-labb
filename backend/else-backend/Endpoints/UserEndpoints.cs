@@ -1,5 +1,6 @@
 ﻿using else_backend.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Net.NetworkInformation;
 
 namespace else_backend.Endpoints
 {
@@ -16,6 +17,8 @@ namespace else_backend.Endpoints
             var users = await db.Users.ToListAsync();
             return Results.Ok(users);
         }
+
+       
 
     }
 }

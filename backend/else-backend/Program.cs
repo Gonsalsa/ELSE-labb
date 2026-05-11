@@ -3,6 +3,7 @@ using else_backend.Endpoints;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddCors();
 
 var connString = builder.Configuration
     .GetConnectionString("DefaultConnection")
@@ -11,7 +12,19 @@ var connString = builder.Configuration
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connString));
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
+
+app.UseCors(options => 
+    options.AllowAnyOrigin()
+    .AllowAnyHeader()
+    .AllowAnyMethod());
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
 
 using (var scope = app.Services.CreateScope())
 {
@@ -23,5 +36,8 @@ using (var scope = app.Services.CreateScope())
 
 app.UseHttpsRedirection();
 app.MapUserEndpoints();
+app.MapTodoEndpoints();
+
+
 app.Run();
 
