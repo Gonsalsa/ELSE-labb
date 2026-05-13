@@ -1,0 +1,83 @@
+:root {
+  /* Colors */
+  --bg-rgb: 18, 22, 33;
+  --primary-rgb: 200, 164, 77;
+  --secondary-rgb: 223, 207, 229;
+
+  --success-rgb: 120, 196, 147;
+  --warning-rgb: 225, 95, 81;
+  --disabled-rgb: 67, 71, 81;
+  --wip-rgb: 255, 223, 118;
+
+  --foreground-primary-rgb: 242, 240, 228;
+  --foreground-secondary-rgb: 51, 64, 97;
+  --foreground-disabled-rgb: 160, 165, 177;
+
+  /* Typography */
+  --text-base: 16px;
+
+  /* Misc. */
+  --border-radius: 5px;
+  --border-width: 1px;
+  --padding-xs: 5px;
+  --padding-sm: 10px;
+  --padding-md: 20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: rgb(var(--bg-rgb));
+  color: rgb(var(--foreground-primary-rgb));
+}
+
+button {
+  border-radius: var(--border-radius);
+  background: rgb(var(--primary-rgb));
+  color: rgb(var(--foreground-primary-rgb));
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--padding-xs) var(--padding-sm);
+  border: var(--border-width) var(--primary);
+  min-width: 133px;
+  font-size: var(--text-base);
+  cursor: pointer;
+}
+
+button:hover {
+  box-shadow: 0 5px 20px rgba(var(--primary-rgb), 0.3);
+  scale: 0.99;
+}
+
+.logo {
+  color: #c8a44d;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: max-content;
+
+  > :first-child {
+    grid-column: 1 / span 2;
+  }
+
+  > :last-child {
+    grid-column: 2 / span 2;
+    grid-row: 2;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border-width: 0;
+}

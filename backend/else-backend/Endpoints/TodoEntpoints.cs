@@ -1,10 +1,11 @@
 ﻿using else_backend.Data;
 using else_backend.Data.Entities;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace else_backend.Endpoints
 {
-    public static class TodoEntpoints
+    public static class TodoEndpoints
     {
         public static void MapTodoEndpoints(this WebApplication app)
         {
@@ -12,6 +13,8 @@ namespace else_backend.Endpoints
 
             todo.MapGet("", GetTodo);
             todo.MapPost("", CreateToDo);
+            todo.MapPut("{id:int}", UpdateToDo);
+            todo.MapDelete("{id:int}", DeleteToDo);
         }
         private static async Task<IResult> GetTodo(AppDbContext db)
         {
@@ -19,14 +22,41 @@ namespace else_backend.Endpoints
             return Results.Ok(todo);
         }
 
-        //A big catastrophy have been avoided, all quiet on the western front
-
         private static async Task<IResult> CreateToDo(TodoItem todo, AppDbContext db)
         {
             db.todoItems.Add(todo);
             await db.SaveChangesAsync();
 
             return Results.Created($"/api/todo{todo.Id}", todo);
+        }
+
+        private static async Task<Results<Ok, NotFound>> UpdateToDo(int id, TodoItem updated, AppDbContext db)
+        {
+            var existing = await db.todoItems.FindAsync(id);
+
+            if (existing == null)
+                return TypedResults.NotFound();
+
+            existing.Title = string.IsNullOrWhiteSpace(updated.Title) ? existing.Title : updated.Title;
+
+            existing.IsCompleted = updated.IsCompleted;
+
+            await db.SaveChangesAsync();
+
+            return TypedResults.Ok();
+        }
+
+        private static async Task<Results<NoContent, NotFound>> DeleteToDo(int id, AppDbContext db)
+        {
+            var existing = await db.todoItems.FindAsync(id);
+
+            if (existing == null)
+                return TypedResults.NotFound();
+
+            db.todoItems.Remove(existing);
+            await db.SaveChangesAsync();
+
+            return TypedResults.NoContent();
         }
     }
 }

@@ -1,8 +1,9 @@
-import { useState } from 'react'
-import type { User } from '../types/Type'
+import { Fragment, useState } from 'react'
+import type { LoginInputField, User } from '../types/Type'
 import styles from '../css/LoginPage.module.css'
 import GetUsers from '../services/UserService'
 import { useNavigate } from 'react-router'
+import Logo from '../components/Logo'
 
 const LoginPage = () => {
   const navigate = useNavigate()
@@ -26,22 +27,47 @@ const LoginPage = () => {
     }
   }
 
+  const inputs: LoginInputField[] = [
+    {
+      label: 'Username',
+      value: username,
+      onChange: (e) => setUsername(e.target.value),
+      name: 'username',
+    },
+    {
+      label: 'Password',
+      value: password,
+      onChange: (e) => setPassword(e.target.value),
+      name: 'password',
+    },
+  ]
+
   return (
-    <section>
-      <div>
-        <h1>Login</h1>
-      </div>
-      <form onSubmit={handleLogin}>
-        <label>Username</label>
-        <input value={username} onChange={(e) => setUsername(e.target.value)} />
-        <label>Password</label>
-        <input value={password} onChange={(e) => setPassword(e.target.value)} />
-        <button type="submit" className={styles.loginButton}>
-          Login
-        </button>
-        <p>{message}</p>
+    <main className={styles.LoginPageWrapper}>
+      <h1 className={styles.loginHeader}>
+        <Logo />
+      </h1>
+
+      <form onSubmit={handleLogin} className={styles.loginForm}>
+        {inputs.map(({ label, value, onChange, name }) => (
+          <Fragment key={name}>
+            <label className="sr-only" id="username">
+              {label}
+            </label>
+            <input
+              className={styles.loginInput}
+              value={value}
+              onChange={onChange}
+              name={name}
+              placeholder={label}
+            />
+          </Fragment>
+        ))}
+
+        <button type="submit">Login</button>
+        {message && <p className={styles.ErrorMessage}>{message}</p>}
       </form>
-    </section>
+    </main>
   )
 }
 export default LoginPage

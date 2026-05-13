@@ -1,0 +1,29 @@
+.toDoList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 438px;
+  padding: 0;
+}
+
+.toDoCard {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: var(--padding-md) var(--padding-sm);
+  border-radius: var(--border-radius);
+  background: rgba(var(--secondary-rgb), 0.2);
+
+  > h3 {
+    font-size: var(--text-base);
+    margin: 0px;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  > input {
+    height: 20px;
+    width: 20px;
+  }
+}
