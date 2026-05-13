@@ -1,5 +1,5 @@
 ﻿using else_backend.Data;
-using else_backend.Data.Enties;
+using else_backend.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace else_backend.Endpoints
@@ -11,7 +11,7 @@ namespace else_backend.Endpoints
             var todo = app.MapGroup("/api/todo");
 
             todo.MapGet("", GetTodo);
-            todo.MapPost("", CreatTodo);
+            todo.MapPost("", CreateToDo);
         }
         private static async Task<IResult> GetTodo(AppDbContext db)
         {
@@ -21,12 +21,12 @@ namespace else_backend.Endpoints
 
         //A big catastrophy have been avoided, all quiet on the western front
 
-        private static async Task<IResult> CreatTodo(TodoItem todo, AppDbContext db)
+        private static async Task<IResult> CreateToDo(TodoItem todo, AppDbContext db)
         {
             db.todoItems.Add(todo);
             await db.SaveChangesAsync();
 
             return Results.Created($"/api/todo{todo.Id}", todo);
-        }  
+        }
     }
 }

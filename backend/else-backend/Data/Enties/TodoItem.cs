@@ -1,4 +1,4 @@
-﻿namespace else_backend.Data.Enties
+﻿namespace else_backend.Data.Entities
 {
     public class TodoItem
     {

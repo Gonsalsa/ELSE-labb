@@ -3,7 +3,16 @@ using else_backend.Endpoints;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddCors();
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
 
 var connString = builder.Configuration
     .GetConnectionString("DefaultConnection")
@@ -17,11 +26,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-app.UseCors(options => 
-    options.AllowAnyOrigin()
-    .AllowAnyHeader()
-    .AllowAnyMethod());
-
+app.UseCors();
 app.UseSwagger();
 app.UseSwaggerUI();
 
@@ -37,7 +42,6 @@ using (var scope = app.Services.CreateScope())
 app.UseHttpsRedirection();
 app.MapUserEndpoints();
 app.MapTodoEndpoints();
-
 
 app.Run();
 
