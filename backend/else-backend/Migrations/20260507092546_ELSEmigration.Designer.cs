@@ -24,7 +24,7 @@ namespace else_backend.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("else_backend.Data.Enties.TodoItem", b =>
+            modelBuilder.Entity("else_backend.Data.Entities.TodoItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

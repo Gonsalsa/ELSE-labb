@@ -4,8 +4,8 @@
     "\\backend",
     "\\backend\\else-backend",
     "\\backend\\else-backend\\Data",
-    "\\backend\\else-backend\\Data\\Enties"
+    "\\backend\\else-backend\\Data\\Entities"
   ],
-  "SelectedNode": "\\backend\\else-backend\\Data\\Enties\\TodoItem.cs",
+  "SelectedNode": "\\backend\\else-backend\\Data\\Entities\\TodoItem.cs",
   "PreviewInSolutionExplorer": false
 }
