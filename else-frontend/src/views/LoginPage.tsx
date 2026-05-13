@@ -1,0 +1,47 @@
+import { useState } from 'react'
+import type { User } from '../types/Type'
+import styles from '../css/LoginPage.module.css'
+import GetUsers from '../services/UserService'
+import { useNavigate } from 'react-router'
+
+const LoginPage = () => {
+  const navigate = useNavigate()
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [message, setMessage] = useState('')
+
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const users = await GetUsers()
+
+    const foundUser = users.find(
+      (user: User) => user.username === username && user.password === password
+    )
+    if (foundUser) {
+      setMessage('login successful')
+      localStorage.setItem('currentUser', JSON.stringify(foundUser))
+      navigate('/')
+    } else {
+      setMessage('wrong username or password')
+    }
+  }
+
+  return (
+    <section>
+      <div>
+        <h1>Login</h1>
+      </div>
+      <form onSubmit={handleLogin}>
+        <label>Username</label>
+        <input value={username} onChange={(e) => setUsername(e.target.value)} />
+        <label>Password</label>
+        <input value={password} onChange={(e) => setPassword(e.target.value)} />
+        <button type="submit" className={styles.loginButton}>
+          Login
+        </button>
+        <p>{message}</p>
+      </form>
+    </section>
+  )
+}
+export default LoginPage

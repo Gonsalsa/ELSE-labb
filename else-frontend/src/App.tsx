@@ -1,12 +1,12 @@
-import "./App.css";
-import LoginPage from "./components/Pages/LoginPage";
+import { Outlet } from 'react-router'
+import './App.css'
 
 function App() {
   return (
     <>
-      <LoginPage />
+      <Outlet />
     </>
-  );
+  )
 }
 
-export default App;
+export default App
