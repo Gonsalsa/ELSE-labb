@@ -1,5 +1,7 @@
 ﻿using else_backend.Data;
+using else_backend.Data.Dtos;
 using else_backend.Data.Entities;
+using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,12 +24,17 @@ namespace else_backend.Endpoints
             return Results.Ok(todo);
         }
 
-        private static async Task<IResult> CreateToDo(TodoItem todo, AppDbContext db)
+        private static async Task<IResult> CreateToDo(CreateTodoItemDto newToDo, AppDbContext db)
         {
-            db.todoItems.Add(todo);
+            var toDo = new TodoItem
+            {
+                Title = newToDo.Title
+            };
+
+            db.todoItems.Add(toDo);
             await db.SaveChangesAsync();
 
-            return Results.Created($"/api/todo{todo.Id}", todo);
+            return Results.Created($"/api/todo{toDo.Id}", toDo);
         }
 
         private static async Task<Results<Ok, NotFound>> UpdateToDo(int id, TodoItem updated, AppDbContext db)

@@ -8,6 +8,7 @@
   --warning-rgb: 225, 95, 81;
   --disabled-rgb: 67, 71, 81;
   --wip-rgb: 255, 223, 118;
+  --draft-rgb: 160, 165, 177;
 
   --foreground-primary-rgb: 242, 240, 228;
   --foreground-secondary-rgb: 51, 64, 97;
@@ -35,8 +36,10 @@ body {
 }
 
 button {
+  --background-color: var(--primary-rgb);
+
   border-radius: var(--border-radius);
-  background: rgb(var(--primary-rgb));
+  background: rgb(var(--background-color));
   color: rgb(var(--foreground-primary-rgb));
   font-weight: bold;
   display: flex;
@@ -47,11 +50,11 @@ button {
   min-width: 133px;
   font-size: var(--text-base);
   cursor: pointer;
-}
 
-button:hover {
-  box-shadow: 0 5px 20px rgba(var(--primary-rgb), 0.3);
-  scale: 0.99;
+  &:hover {
+    box-shadow: 0 5px 20px rgba(var(--background-color), 0.3);
+    scale: 0.99;
+  }
 }
 
 .logo {

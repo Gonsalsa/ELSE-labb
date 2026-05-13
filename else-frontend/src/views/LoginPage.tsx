@@ -51,10 +51,11 @@ const LoginPage = () => {
       <form onSubmit={handleLogin} className={styles.loginForm}>
         {inputs.map(({ label, value, onChange, name }) => (
           <Fragment key={name}>
-            <label className="sr-only" id="username">
+            <label className="sr-only" htmlFor={name}>
               {label}
             </label>
             <input
+              id={name}
               className={styles.loginInput}
               value={value}
               onChange={onChange}

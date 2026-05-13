@@ -9,15 +9,17 @@ const ToDoItemCard = ({ id, title, isCompleted }: ToDo) => {
 
   return (
     <div className={styles.toDoCard}>
-      <h3>{title}</h3>
-      <input
-        type="checkbox"
-        name={`${id}`}
-        id={`${id}`}
-        checked={status}
-        onChange={() => setStatus(!status)}
-      />
-      <button>Delete</button>
+      <div className={styles.rail}>
+        <input
+          type="checkbox"
+          name={title}
+          id={`${id}`}
+          checked={status}
+          onChange={() => setStatus(!status)}
+        />
+        <label htmlFor={`${id}`}>{title}</label>
+        <button>Delete</button>
+      </div>
     </div>
   )
 }
