@@ -3,28 +3,29 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 100%;
   max-width: 438px;
   padding: 0;
 }
 
 .toDoCardWrapper {
   overflow: hidden;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-
-  &:-webkit-scrollbar {
-    display: none;
-  }
+  width: 100%;
 }
 
 .rail {
   --gap: 10px;
   --button-size: 40px;
+
   display: flex;
   align-items: center;
   gap: var(--gap);
-  width: fit-content;
   scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &:-webkit-scrollbar {
+    display: none;
+  }
 
   > * {
     scroll-snap-align: end;
@@ -38,6 +39,12 @@
   border-radius: var(--border-radius);
   background: rgba(var(--secondary-rgb), 0.2);
   gap: var(--gap);
+  min-width: 100%;
+  transition: min-width 0.3s ease;
+
+  &:has([type='text']:focus-visible) {
+    border-bottom: 2px solid rgb(var(--foreground-primary-rgb));
+  }
 }
 
 [type='text'] {
@@ -50,13 +57,11 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: calc(438px - var(--icon-size) - var(--padding-sm) * 3);
-  transition: width 0.3s ease;
+  flex: 1;
   color: var(--color);
 
   &:focus-visible {
     outline: transparent;
-    border-bottom: 1px solid rgb(var(--foreground-primary-rgb));
   }
 
   &::placeholder {
@@ -96,9 +101,9 @@
 
   color: rgb(var(--color-rgb));
   width: var(--button-size);
+  min-width: var(--button-size);
   height: var(--button-size);
   overflow: hidden;
-  min-width: auto;
 
   > svg:hover {
     scale: 1.1;
@@ -107,16 +112,14 @@
 
 /* Non touch devices */
 @media (hover: hover) {
-  .toDoCardWrapper:hover [type='text'] {
-    width: calc(
-      438px - var(--icon-size) - var(--padding-sm) * 4 - var(--button-size)
-    );
+  .toDoCardWrapper:hover .toDoCard {
+    min-width: calc(100% - var(--button-size) - var(--gap));
   }
 }
 
 /* Touch devices */
 @media (hover: none) {
-  .toDoCardWrapper {
+  .rail {
     overflow-x: auto;
   }
 }
