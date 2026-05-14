@@ -8,6 +8,7 @@ export type ToDo = {
   id: number
   title: string
   isCompleted: boolean
+  order: number
 }
 
 export type LoginInputField = {

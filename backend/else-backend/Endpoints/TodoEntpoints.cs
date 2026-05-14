@@ -20,7 +20,7 @@ namespace else_backend.Endpoints
         }
         private static async Task<IResult> GetTodo(AppDbContext db)
         {
-            var todo = await db.todoItems.ToListAsync();
+            var todo = await db.todoItems.OrderBy(t => t.Order).ToListAsync();
             return Results.Ok(todo);
         }
 
@@ -47,6 +47,8 @@ namespace else_backend.Endpoints
             existing.Title = string.IsNullOrWhiteSpace(updated.Title) ? existing.Title : updated.Title;
 
             existing.IsCompleted = updated.IsCompleted;
+
+            existing.Order = updated.Order;
 
             await db.SaveChangesAsync();
 

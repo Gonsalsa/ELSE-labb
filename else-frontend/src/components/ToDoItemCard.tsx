@@ -15,10 +15,10 @@ const ToDoItemCard = ({
   const [title, setTitle] = useState(ogTitle)
   const [isCompleted, setIsCompleted] = useState(ogIsCompleted)
 
-  const update = async (updated: { title?: string; status?: boolean }) => {
+  const update = async (updated: { title?: string; isCompleted?: boolean }) => {
     await updateToDo(id, {
       title: updated.title ?? title,
-      isCompleted: updated.status ?? isCompleted,
+      isCompleted: updated.isCompleted ?? isCompleted,
     })
   }
 
@@ -40,7 +40,7 @@ const ToDoItemCard = ({
   const handleStatusChange = async () => {
     const newStatus = !isCompleted
     setIsCompleted(newStatus)
-    await update({ status: newStatus })
+    await update({ isCompleted: newStatus })
   }
 
   const handleDelete = async () => {

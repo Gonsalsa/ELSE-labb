@@ -21,6 +21,7 @@ export const updateToDo = async (
   todo: {
     title: string
     isCompleted: boolean
+    order?: number
   }
 ) => {
   try {
@@ -36,10 +37,10 @@ export const updateToDo = async (
     console.log(todo)
 
     if (!response.ok) {
-      throw new Error(`POST failed: ${response.status}`)
+      throw new Error(`PUT failed: ${response.status}`)
     }
   } catch (error) {
-    console.error(`POST JSON error`, error)
+    console.error(`PUT JSON error`, error)
   }
 }
 
