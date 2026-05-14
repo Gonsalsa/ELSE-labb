@@ -23,6 +23,7 @@
   --padding-xs: 5px;
   --padding-sm: 10px;
   --padding-md: 20px;
+  --icon-size: 20px;
 }
 
 * {
@@ -38,8 +39,8 @@ body {
 button {
   --background-color: var(--primary-rgb);
 
-  border-radius: var(--border-radius);
   background: rgb(var(--background-color));
+  border-radius: var(--border-radius);
   color: rgb(var(--foreground-primary-rgb));
   font-weight: bold;
   display: flex;
@@ -54,6 +55,11 @@ button {
   &:hover {
     box-shadow: 0 5px 20px rgba(var(--background-color), 0.3);
     scale: 0.99;
+  }
+
+  > svg {
+    width: var(--icon-size);
+    height: var(--icon-size);
   }
 }
 

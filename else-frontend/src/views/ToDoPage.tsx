@@ -1,9 +1,9 @@
-import { useNavigate } from 'react-router'
-import GetToDos from '../services/ToDoService'
 import { useEffect, useState } from 'react'
-import type { ToDo } from '../types/Type'
+import { useNavigate } from 'react-router'
 import ToDoItemCard from '../components/ToDoItemCard'
 import styles from '../css/ToDoPage.module.css'
+import { getToDos } from '../services/ToDoService'
+import type { ToDo } from '../types/Type'
 
 const ToDoPage = () => {
   const navigate = useNavigate()
@@ -15,12 +15,16 @@ const ToDoPage = () => {
 
   useEffect(() => {
     const GetToDoList = async () => {
-      const toDo = await GetToDos()
+      const toDo = await getToDos()
       setToDo(toDo)
     }
 
     GetToDoList()
   }, [])
+
+  const handleDelete = (id: number) => {
+    setToDo((prev) => prev.filter((t) => t.id !== id))
+  }
 
   return (
     <>
@@ -31,8 +35,8 @@ const ToDoPage = () => {
       <main>
         <ul className={styles.toDoList}>
           {toDo.map((toDoItem) => (
-            <li>
-              <ToDoItemCard {...toDoItem} />
+            <li key={toDoItem.id}>
+              <ToDoItemCard {...toDoItem} onDelete={handleDelete} />
             </li>
           ))}
         </ul>

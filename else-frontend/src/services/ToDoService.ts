@@ -2,7 +2,7 @@ import type { ToDo } from '../types/Type'
 
 const baseUrl = import.meta.env.VITE_API_URL
 
-async function GetToDos(): Promise<ToDo[]> {
+export const getToDos = async (): Promise<ToDo[]> => {
   try {
     const response = await fetch(`${baseUrl}/todo`)
     if (!response.ok) {
@@ -16,4 +16,39 @@ async function GetToDos(): Promise<ToDo[]> {
   }
 }
 
-export default GetToDos
+export const updateToDo = async (
+  id: number,
+  todo: {
+    title: string
+    isCompleted: boolean
+  }
+) => {
+  try {
+    const response = await fetch(`${baseUrl}/todo/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify(todo),
+    })
+
+    console.log(todo)
+
+    if (!response.ok) {
+      throw new Error(`POST failed: ${response.status}`)
+    }
+  } catch (error) {
+    console.error(`POST JSON error`, error)
+  }
+}
+
+export const deleteToDo = async (id: number): Promise<void> => {
+  const response = await fetch(`${baseUrl}/todo/${id}`, {
+    method: 'DELETE',
+  })
+
+  if (!response.ok) {
+    throw new Error(`DELETE failed: ${response.status}`)
+  }
+}

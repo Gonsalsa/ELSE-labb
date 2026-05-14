@@ -1,9 +1,9 @@
 import { Fragment, useState } from 'react'
 import type { LoginInputField, User } from '../types/Type'
 import styles from '../css/LoginPage.module.css'
-import GetUsers from '../services/UserService'
 import { useNavigate } from 'react-router'
 import Logo from '../components/Logo'
+import getUsers from '../services/UserService'
 
 const LoginPage = () => {
   const navigate = useNavigate()
@@ -13,7 +13,7 @@ const LoginPage = () => {
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const users = await GetUsers()
+    const users = await getUsers()
 
     const foundUser = users.find(
       (user: User) => user.username === username && user.password === password
