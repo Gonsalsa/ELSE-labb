@@ -1,8 +1,25 @@
-.toDoPageWrapper > * {
-  margin: 0 auto;
-  max-height: 65vh;
-  display: flex;
-  flex-direction: column;
+.toDoPageWrapper {
+  --_margin-box: 80px;
+
+  position: absolute;
+  inset: 0;
+  margin: var(--_margin-box) auto;
+  width: 100vw;
+  max-height: calc(100vh - var(--_margin-box) * 2);
+  overflow: hidden;
+
+  display: grid;
+
+  > * {
+    margin-inline: 16px;
+  }
+}
+
+@media (min-width: 438px) {
+  .toDoPageWrapper > * {
+    margin-inline: auto;
+    width: 100%;
+  }
 }
 
 /* Timer */
@@ -11,8 +28,7 @@
   flex-direction: column;
   align-items: center;
   gap: 25px;
-  width: 100%;
-  max-width: 438px;
+  max-width: var(--max-width);
 }
 
 .timerClock {
@@ -25,6 +41,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
+
   > :first-child {
     grid-column: 2;
   }
@@ -38,6 +55,7 @@
     --_background-color: var(--tertiary-rgb);
     --_foreground-color: var(--foreground-tertiary-rgb);
     width: 100%;
+    min-width: unset;
     border-radius: 0;
   }
 
@@ -76,9 +94,25 @@
   --_gap: 10px;
   --_wrapper-min-height: calc(2lh + var(--_gap) + var(--_icon-height) * 3);
 
-  max-width: 438px;
+  max-width: var(--max-width);
   min-height: var(--_wrapper-min-height);
+  flex: 1;
   position: relative;
+}
+
+.toDoListRail {
+  --_margin-top: 50px;
+
+  margin-top: var(--_margin-top);
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  height: min-content;
+  max-height: calc(100% - var(--_margin-top));
+
+  &:-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .toDoList {
@@ -89,18 +123,6 @@
   width: 100%;
   padding: 0;
   margin: 0;
-}
-
-.toDoListRail {
-  margin-top: 50px;
-  overflow-y: scroll;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  height: min-content;
-
-  &:-webkit-scrollbar {
-    display: none;
-  }
 }
 
 /* ToDo Card */
@@ -252,16 +274,11 @@
   border-radius: var(--border-radius);
   animation: popup 0.2s ease;
   width: 100%;
-  max-width: 438px;
+  max-width: var(--max-width);
 
   &:has([type='text']:focus-visible) {
     border-bottom: 2px solid rgb(var(--foreground-primary-rgb));
   }
-
-  /* position: relative;
-  gap: var(--_gap);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.05); */
 
   > input {
     background: transparent;
