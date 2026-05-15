@@ -4,12 +4,28 @@ import ToDoItemCard from '../components/ToDoItemCard'
 import styles from '../css/ToDoPage.module.css'
 import { getToDos, updateToDo } from '../services/ToDoService'
 import type { ToDo } from '../types/Type'
+import { ArrowPathIcon } from '@heroicons/react/16/solid'
 
+type TimerSetting = 'work' | 'shortBreak' | 'longBreak'
 const ToDoPage = () => {
   const navigate = useNavigate()
 
   const [toDos, setToDos] = useState<ToDo[]>([])
   const [dragId, setDragId] = useState<number | null>(null)
+
+  const timerSettings: Record<TimerSetting, number> = {
+    work: 1,
+    shortBreak: 5,
+    longBreak: 15,
+  }
+
+  const [timerButton, setTimerButton] = useState<'Start' | 'Stop'>('Start')
+  const [timerSetting, setTimerSetting] = useState<TimerSetting>('work')
+  const [timerMinutes, setTimerMinutes] = useState<number | string>(
+    timerSettings[timerSetting]
+  )
+  const [timerSeconds, setTimerSeconds] = useState<number | string>('00')
+  const [intervalId, setIntervalId] = useState<number | null>(null)
 
   const handleLogout = () => {
     localStorage.removeItem('currentUser')
@@ -61,10 +77,8 @@ const ToDoPage = () => {
 
     updated[toIndex] = updatedMoved
 
-    // 1. UI update direkt (optimistic)
     setToDos(updated)
 
-    // 2. API call separat
     await updateToDo(moved.id, {
       title: moved.title,
       isCompleted: moved.isCompleted,
@@ -74,6 +88,81 @@ const ToDoPage = () => {
     setDragId(null)
   }
 
+  const handleTimerSettings = (timerSetting: TimerSetting) => {
+    setTimerSetting(timerSetting)
+
+    switch (timerSetting) {
+      case 'work':
+        setTimerMinutes(timerSettings.work)
+        break
+      case 'shortBreak':
+        setTimerMinutes(timerSettings.shortBreak)
+        break
+      case 'longBreak':
+        setTimerMinutes(timerSettings.longBreak)
+        break
+    }
+    setTimerSeconds('00')
+  }
+
+  const startTimer = () => {
+    setTimerButton('Stop')
+
+    const endTime = new Date().getTime() + Number(timerMinutes) * 60000
+
+    const interval = setInterval(() => {
+      const now = new Date().getTime()
+      const distance = endTime - now
+
+      if (distance <= 0) {
+        clearInterval(interval)
+        setIntervalId(null)
+
+        setTimerMinutes('00')
+        setTimerButton('Reset')
+        return
+      }
+
+      const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
+      const s = Math.floor((distance % (1000 * 60)) / 1000)
+
+      setTimerMinutes(m < 10 ? `0${m}` : m)
+      setTimerSeconds(s < 10 ? `0${s}` : s)
+    }, 1000)
+
+    setIntervalId(interval)
+  }
+
+  const resetTimer = () => {
+    if (intervalId) {
+      clearInterval(intervalId)
+      setIntervalId(null)
+    }
+
+    setTimerMinutes(timerSettings[timerSetting])
+    setTimerSeconds('00')
+    setTimerButton('Start')
+  }
+
+  const stopTimer = () => {
+    if (intervalId) {
+      clearInterval(intervalId)
+      setIntervalId(null)
+    }
+    setTimerButton('Start')
+  }
+
+  const handleTimerRun = () => {
+    switch (timerButton) {
+      case 'Start':
+        startTimer()
+        break
+      case 'Stop':
+        stopTimer()
+        break
+    }
+  }
+
   return (
     <>
       <aside>
@@ -81,6 +170,51 @@ const ToDoPage = () => {
       </aside>
 
       <main>
+        <div className={styles.timerWrapper}>
+          <span className={styles.timerClock}>
+            <span>{timerMinutes}</span>:<span>{timerSeconds}</span>
+          </span>
+
+          <button onClick={handleTimerRun}>{timerButton}</button>
+
+          <button onClick={resetTimer}>
+            <ArrowPathIcon />
+            <span className="sr-only">Reset</span>
+          </button>
+
+          <div className={styles.timerSettingsWrapper}>
+            <input
+              type="radio"
+              className="active"
+              onClick={() => handleTimerSettings('work')}
+              name="timerSetting"
+              id="work"
+            />
+            <label htmlFor="work" className="button">
+              Do it
+            </label>
+
+            <input
+              type="radio"
+              onClick={() => handleTimerSettings('shortBreak')}
+              name="timerSetting"
+              id="shortBreak"
+            />
+            <label htmlFor="shortBreak" className="button">
+              Breathe
+            </label>
+
+            <input
+              type="radio"
+              onClick={() => handleTimerSettings('longBreak')}
+              name="timerSetting"
+              id="longBreak"
+            />
+            <label htmlFor="longBreak" className="button">
+              Recover
+            </label>
+          </div>
+        </div>
         <ul className={styles.toDoList}>
           {toDos.map((toDoItem, index) => (
             <li

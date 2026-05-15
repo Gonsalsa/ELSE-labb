@@ -110,6 +110,37 @@
   }
 }
 
+.timerWrapper {
+}
+
+.timerClock {
+  font-size: 96px;
+  font-weight: bold;
+}
+
+.timerSettingsWrapper {
+  display: flex;
+
+  #longBreak {
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  }
+
+  > .active {
+    --background-color: var(--secondary-rgb);
+    --foreground-color: var(--foreground-secondary-rgb);
+  }
+
+  [type='radio'] {
+    display: none;
+  }
+}
+
+/* label.button {
+  border-radius: 0;
+  --background-color: var(--disabled-rgb);
+  --foreground-color: var(--foreground-disabled-rgb);
+} */
+
 /* Non touch devices */
 @media (hover: hover) {
   .toDoCardWrapper:hover .toDoCard {

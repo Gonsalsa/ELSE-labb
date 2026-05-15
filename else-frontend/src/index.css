@@ -36,12 +36,14 @@ body {
   color: rgb(var(--foreground-primary-rgb));
 }
 
-button {
+button,
+.button {
   --background-color: var(--primary-rgb);
+  --foreground-color: var(--foreground-primary-rgb);
 
   background: rgb(var(--background-color));
   border-radius: var(--border-radius);
-  color: rgb(var(--foreground-primary-rgb));
+  color: rgb(var(--foreground-color));
   font-weight: bold;
   display: flex;
   justify-content: center;
