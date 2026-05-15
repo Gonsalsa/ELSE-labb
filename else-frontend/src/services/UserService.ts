@@ -2,7 +2,7 @@ import type { User } from '../types/Type'
 
 const baseUrl = import.meta.env.VITE_API_URL
 
-async function GetUsers(): Promise<User[]> {
+async function getUsers(): Promise<User[]> {
   try {
     const response = await fetch(`${baseUrl}/user`)
     if (!response.ok) {
@@ -16,4 +16,4 @@ async function GetUsers(): Promise<User[]> {
   }
 }
 
-export default GetUsers
+export default getUsers

@@ -36,7 +36,7 @@ namespace else_backend.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("isComplete")
+                    b.Property<bool>("IsCompleted")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");

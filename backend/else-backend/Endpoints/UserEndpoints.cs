@@ -18,7 +18,7 @@ namespace else_backend.Endpoints
             return Results.Ok(users);
         }
 
-       
+
 
     }
 }

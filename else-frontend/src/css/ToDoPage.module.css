@@ -1,0 +1,125 @@
+.toDoList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 438px;
+  padding: 0;
+}
+
+.toDoCardWrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.rail {
+  --gap: 10px;
+  --button-size: 40px;
+
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &:-webkit-scrollbar {
+    display: none;
+  }
+
+  > * {
+    scroll-snap-align: end;
+  }
+}
+
+.toDoCard {
+  display: flex;
+  padding: var(--padding-md) calc(var(--padding-sm) + var(--icon-size))
+    var(--padding-md) var(--padding-sm);
+  border-radius: var(--border-radius);
+  background: rgba(var(--secondary-rgb), 0.2);
+  gap: var(--gap);
+  min-width: 100%;
+  transition: min-width 0.3s ease;
+
+  &:has([type='text']:focus-visible) {
+    border-bottom: 2px solid rgb(var(--foreground-primary-rgb));
+  }
+}
+
+[type='text'] {
+  --color: rgb(var(--foreground-primary-rgb));
+
+  background: transparent;
+  border: transparent;
+  font-size: var(--text-base);
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  color: var(--color);
+
+  &:focus-visible {
+    outline: transparent;
+  }
+
+  &::placeholder {
+    color: var(--color);
+  }
+}
+
+[type='checkbox'] {
+  display: none;
+
+  + label {
+    position: relative;
+    color: black;
+
+    &:after {
+      content: '';
+      cursor: pointer;
+      position: absolute;
+      width: var(--icon-size);
+      height: var(--icon-size);
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgb(var(--success-rgb));
+      border-radius: 50%;
+    }
+  }
+
+  &:checked + label::after {
+    background: rgb(var(--draft-rgb));
+  }
+}
+
+.deleteButton {
+  --background-color: transparent;
+  --color-rgb: var(--warning-rgb);
+
+  color: rgb(var(--color-rgb));
+  width: var(--button-size);
+  min-width: var(--button-size);
+  height: var(--button-size);
+  overflow: hidden;
+
+  > svg:hover {
+    scale: 1.1;
+  }
+}
+
+/* Non touch devices */
+@media (hover: hover) {
+  .toDoCardWrapper:hover .toDoCard {
+    min-width: calc(100% - var(--button-size) - var(--gap));
+  }
+}
+
+/* Touch devices */
+@media (hover: none) {
+  .rail {
+    overflow-x: auto;
+  }
+}

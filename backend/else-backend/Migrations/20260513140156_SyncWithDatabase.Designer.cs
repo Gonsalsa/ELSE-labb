@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using else_backend.Data;
 
@@ -10,9 +11,11 @@ using else_backend.Data;
 namespace else_backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260513140156_SyncWithDatabase")]
+    partial class SyncWithDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,9 +34,6 @@ namespace else_backend.Migrations
 
                     b.Property<bool>("IsCompleted")
                         .HasColumnType("bit");
-
-                    b.Property<double>("Order")
-                        .HasColumnType("float");
 
                     b.Property<string>("Title")
                         .IsRequired()
