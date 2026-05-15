@@ -185,7 +185,7 @@ const ToDoPage = () => {
         <button onClick={handleLogout}>Log out</button>
       </aside>
 
-      <main>
+      <main className={styles.toDoPageWrapper}>
         <div className={styles.timerWrapper}>
           <span className={styles.timerClock}>
             <span>{timerMinutes}</span>:<span>{timerSeconds}</span>
@@ -204,9 +204,10 @@ const ToDoPage = () => {
             <input
               type="radio"
               className="active"
-              onClick={() => handleTimerSettings('work')}
+              onChange={() => handleTimerSettings('work')}
               name="timerSetting"
               id="work"
+              checked={timerSetting === 'work'}
             />
             <label htmlFor="work" className="button">
               Do it
@@ -214,7 +215,7 @@ const ToDoPage = () => {
 
             <input
               type="radio"
-              onClick={() => handleTimerSettings('shortBreak')}
+              onChange={() => handleTimerSettings('shortBreak')}
               name="timerSetting"
               id="shortBreak"
             />
@@ -224,7 +225,7 @@ const ToDoPage = () => {
 
             <input
               type="radio"
-              onClick={() => handleTimerSettings('longBreak')}
+              onChange={() => handleTimerSettings('longBreak')}
               name="timerSetting"
               id="longBreak"
             />
@@ -233,6 +234,7 @@ const ToDoPage = () => {
             </label>
           </div>
         </div>
+
         <ul className={styles.toDoList}>
           {toDos.map((toDoItem, index) => (
             <li
@@ -246,6 +248,7 @@ const ToDoPage = () => {
             </li>
           ))}
         </ul>
+
         <button onClick={handelOpen}>+</button>
         {open && (
           <AddTodoModal

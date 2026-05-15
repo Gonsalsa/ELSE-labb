@@ -40,6 +40,7 @@ button,
 .button {
   --background-color: var(--primary-rgb);
   --foreground-color: var(--foreground-primary-rgb);
+  --shadow-color: var(--background-color);
 
   background: rgb(var(--background-color));
   border-radius: var(--border-radius);
@@ -55,8 +56,8 @@ button,
   cursor: pointer;
 
   &:hover {
-    box-shadow: 0 5px 20px rgba(var(--background-color), 0.3);
-    scale: 0.99;
+    box-shadow: 0 5px 20px rgba(var(--shadow-color), 0.3);
+    scale: 1.01;
   }
 
   > svg {
@@ -74,7 +75,7 @@ button,
   min-width: min-content;
 
   > svg:hover {
-    scale: 1.1;
+    scale: 1.05;
   }
 }
 
