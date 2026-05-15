@@ -39,44 +39,47 @@ body {
 
 button,
 .button {
-  --background-color: var(--primary-rgb);
-  --foreground-color: var(--foreground-primary-rgb);
-  --shadow-color: var(--background-color);
+  --_background-color: var(--primary-rgb);
+  --_foreground-color: var(--foreground-primary-rgb);
+  --_shadow-color: var(--_background-color);
+  --padding-block: var(--padding-xs);
+  --padding-inline: var(--padding-sm);
 
-  background: rgb(var(--background-color));
+  background: rgb(var(--_background-color));
   border-radius: var(--border-radius);
-  color: rgb(var(--foreground-color));
+  color: rgb(var(--_foreground-color));
   font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: var(--padding-xs) var(--padding-sm);
+  padding: var(--padding-block) var(--padding-inline);
   border: var(--border-width) var(--primary);
   min-width: 133px;
   font-size: var(--text-base);
   cursor: pointer;
 
   &:hover {
-    box-shadow: 0 5px 20px rgba(var(--shadow-color), 0.3);
+    box-shadow: 0 5px 20px rgba(var(--_shadow-color), 0.3);
     scale: 1.01;
-  }
-
-  > svg {
-    width: var(--icon-size);
-    height: var(--icon-size);
   }
 }
 
 .iconButton {
-  --background-color: transparent;
-  --color-rgb: var(--secondary-rgb);
+  --_background-color: transparent;
+  --_color-rgb: var(--secondary-rgb);
+  --_icon-size: var(--icon-size);
 
-  color: rgb(var(--color-rgb));
+  color: rgb(var(--_color-rgb));
   width: min-content;
-  min-width: min-content;
+  min-width: unset;
 
-  > svg:hover {
+  &:hover {
     scale: 1.05;
+  }
+
+  > svg {
+    width: var(--_icon-size);
+    height: var(--_icon-size);
   }
 }
 

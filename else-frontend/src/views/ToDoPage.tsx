@@ -5,13 +5,15 @@ import styles from '../css/ToDoPage.module.css'
 import { createTodo, getToDos, updateToDo } from '../services/ToDoService'
 import type { TimerSetting, ToDo } from '../types/Type'
 import AddTodoModal from '../components/AddTodoModal'
-import { ArrowPathIcon } from '@heroicons/react/16/solid'
+import { ArrowPathIcon, PlusCircleIcon } from '@heroicons/react/16/solid'
 
 const ToDoPage = () => {
   const navigate = useNavigate()
   const [open, setOpen] = useState<boolean>(false)
   const [toDos, setToDos] = useState<ToDo[]>([])
   const [dragId, setDragId] = useState<number | null>(null)
+
+  const hasTodos = toDos.length > 0
 
   const timerSettings: Record<TimerSetting, number> = {
     work: 25,
@@ -235,21 +237,44 @@ const ToDoPage = () => {
           </div>
         </div>
 
-        <ul className={styles.toDoList}>
-          {toDos.map((toDoItem, index) => (
-            <li
-              key={toDoItem.id}
-              draggable
-              onDragStart={() => handleDragStart(toDoItem.id)}
-              onDragOver={handleDragOver}
-              onDrop={() => handleDrop(index)}
-            >
-              <ToDoItemCard {...toDoItem} onDelete={handleDelete} />
-            </li>
-          ))}
-        </ul>
+        <div className={styles.toDoListWrapper}>
+          {hasTodos && (
+            <div className={styles.toDoListRail}>
+              <ul className={styles.toDoList}>
+                {toDos.map((toDoItem, index) => (
+                  <li
+                    key={toDoItem.id}
+                    draggable
+                    onDragStart={() => handleDragStart(toDoItem.id)}
+                    onDragOver={handleDragOver}
+                    onDrop={() => handleDrop(index)}
+                  >
+                    <ToDoItemCard {...toDoItem} onDelete={handleDelete} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
-        <button onClick={handelOpen}>+</button>
+          <div className={styles.addButtonOverlay}>
+            {!hasTodos && (
+              <>
+                <p>
+                  There's always something to do.
+                  <br />
+                  Let's add som tasks!
+                </p>
+              </>
+            )}
+            <button
+              onClick={handelOpen}
+              className={`iconButton ${styles.addButton}`}
+            >
+              <PlusCircleIcon />
+            </button>
+          </div>
+        </div>
+
         {open && (
           <AddTodoModal
             onClose={() => setOpen(false)}

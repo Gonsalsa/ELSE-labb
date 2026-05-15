@@ -2,32 +2,123 @@
   margin: 0 auto;
 }
 
+/* Timer */
+.timerWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  width: 100%;
+  max-width: 438px;
+}
+
+.timerClock {
+  font-size: 96px;
+  font-weight: bold;
+  line-height: 0.8;
+}
+
+.timerButtonWrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  > :first-child {
+    grid-column: 2;
+  }
+}
+
+.timerSettingsWrapper {
+  display: flex;
+  width: 100%;
+
+  > * {
+    --_background-color: var(--tertiary-rgb);
+    --_foreground-color: var(--foreground-tertiary-rgb);
+    width: 100%;
+    border-radius: 0;
+  }
+
+  > input:first-of-type + label {
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+  }
+
+  > input:last-of-type + label {
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  }
+
+  > [type='radio']:checked + label {
+    --_background-color: var(--secondary-rgb);
+    --_foreground-color: var(--foreground-secondary-rgb);
+  }
+
+  [type='radio'] {
+    display: none;
+
+    &:hover + label {
+      --_shadow-color: var(--secondary-rgb);
+    }
+
+    &:not(:checked):hover + label {
+      --_foreground-color: var(--foreground-tertiary-hover-rgb);
+    }
+  }
+}
+
+/* ToDo List */
+.toDoListWrapper {
+  --_padding-block: var(--padding-md);
+  --_padding-inline: var(--padding-sm);
+  --_icon-height: 48px;
+  --_add-button-overlay-padding-block: var(--_icon-height);
+  --_gap: 10px;
+  --_wrapper-min-height: calc(2lh + var(--_gap) + var(--_icon-height) * 3);
+
+  max-width: 438px;
+  min-height: var(--_wrapper-min-height);
+  position: relative;
+}
+
 .toDoList {
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 10px;
   width: 100%;
-  max-width: 438px;
   padding: 0;
-  margin-top: 50px;
+  margin: 0;
+  padding-bottom: var(--_wrapper-min-height);
 }
 
+.toDoListRail {
+  height: 300px;
+  margin-top: 50px;
+  border: 1px solid red;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &:-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ToDo Card */
 .toDoCardWrapper {
   overflow: hidden;
   width: 100%;
 }
 
 .rail {
-  --gap: 10px;
-  --button-size: 40px;
+  --_gap: 0px;
+  --_button-size: 40px;
 
   display: flex;
   align-items: center;
-  gap: var(--gap);
+
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   -ms-overflow-style: none;
+
   &:-webkit-scrollbar {
     display: none;
   }
@@ -39,11 +130,11 @@
 
 .toDoCard {
   display: flex;
-  padding: var(--padding-md) calc(var(--padding-sm) + var(--icon-size))
-    var(--padding-md) var(--padding-sm);
+  padding: var(--_padding-block) calc(var(--_padding-inline) + var(--icon-size))
+    var(--_padding-block) var(--_padding-inline);
   border-radius: var(--border-radius);
   background: rgba(var(--secondary-rgb), 0.2);
-  gap: var(--gap);
+
   min-width: 100%;
   transition: min-width 0.3s ease;
 
@@ -53,7 +144,7 @@
 }
 
 [type='text'] {
-  --color: rgb(var(--foreground-primary-rgb));
+  --_color: rgb(var(--foreground-primary-rgb));
 
   background: transparent;
   border: transparent;
@@ -63,14 +154,14 @@
   overflow: hidden;
   text-overflow: ellipsis;
   flex: 1;
-  color: var(--color);
+  color: var(--_color);
 
   &:focus-visible {
     outline: transparent;
   }
 
   &::placeholder {
-    color: var(--color);
+    color: var(--_color);
   }
 }
 
@@ -100,12 +191,52 @@
   }
 }
 
-.deleteButton {
-  --background-color: transparent;
-  --color-rgb: var(--warning-rgb);
+/* Non touch devices */
+@media (hover: hover) {
+  .toDoCardWrapper:hover .toDoCard {
+    min-width: calc(100% - var(--_button-size) - var(--_gap));
+  }
+}
 
-  width: var(--button-size);
-  min-width: var(--button-size);
+/* Touch devices */
+@media (hover: none) {
+  .rail {
+    overflow-x: auto;
+  }
+}
+
+.deleteButton {
+  --_color-rgb: var(--warning-rgb);
+  padding-block: var(--_padding-block);
+}
+
+/* Add ToDo Modal */
+.addButtonOverlay {
+  background: linear-gradient(
+    to top,
+    rgba(var(--bg-rgb), 0.8),
+    rgba(var(--bg-rgb), 0)
+  );
+  display: flex;
+  flex-direction: column;
+  gap: var(--_gap);
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-block: var(--_add-button-overlay-padding-block);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  > p {
+    margin: 0;
+    text-align: center;
+  }
+}
+
+.addButton {
+  --_color-rgb: var(--primary-rgb);
+  --_icon-size: var(--_icon-height);
 }
 
 .todopopup {
@@ -131,7 +262,7 @@
   padding: 2em;
   border-radius: var(--border-radius);
   background: rgba(var(--secondary-rgb), 0.2);
-  gap: var(--gap);
+  gap: var(--_gap);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
   animation: popup 0.2s ease;
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -139,6 +270,7 @@
     border-bottom: 2px solid rgb(var(--foreground-primary-rgb));
   }
 }
+
 .addTodoCard input {
   padding: 0.8rem 1rem;
   border: none;
@@ -150,6 +282,7 @@
   height: 3rem;
   width: 25rem;
 }
+
 .closeButton {
   all: unset;
   position: absolute;
@@ -172,80 +305,4 @@
 .closeButton:hover {
   background: rgb(var(--warning-rgb));
   transform: scale(1.08);
-}
-
-.timerWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 25px;
-  width: 100%;
-  max-width: 438px;
-}
-
-.timerClock {
-  font-size: 96px;
-  font-weight: bold;
-  line-height: 0.8;
-}
-
-.timerButtonWrapper {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-
-  > :first-child {
-    grid-column: 2;
-  }
-}
-
-.timerSettingsWrapper {
-  display: flex;
-  width: 100%;
-
-  > * {
-    --background-color: var(--tertiary-rgb);
-    --foreground-color: var(--foreground-tertiary-rgb);
-
-    width: 100%;
-    border-radius: 0;
-  }
-
-  > input:first-of-type + label {
-    border-radius: var(--border-radius) 0 0 var(--border-radius);
-  }
-
-  > input:last-of-type + label {
-    border-radius: 0 var(--border-radius) var(--border-radius) 0;
-  }
-
-  > [type='radio']:checked + label {
-    --background-color: var(--secondary-rgb);
-    --foreground-color: var(--foreground-secondary-rgb);
-  }
-
-  [type='radio'] {
-    display: none;
-
-    &:hover + label {
-      --shadow-color: var(--secondary-rgb);
-    }
-    &:not(:checked):hover + label {
-      --foreground-color: var(--foreground-tertiary-hover-rgb);
-    }
-  }
-}
-
-/* Non touch devices */
-@media (hover: hover) {
-  .toDoCardWrapper:hover .toDoCard {
-    min-width: calc(100% - var(--button-size) - var(--gap));
-  }
-}
-
-/* Touch devices */
-@media (hover: none) {
-  .rail {
-    overflow-x: auto;
-  }
 }
