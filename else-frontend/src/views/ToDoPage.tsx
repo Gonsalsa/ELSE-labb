@@ -191,12 +191,14 @@ const ToDoPage = () => {
             <span>{timerMinutes}</span>:<span>{timerSeconds}</span>
           </span>
 
-          <button onClick={handleTimerRun}>{timerButton}</button>
+          <div className={styles.timerButtonWrapper}>
+            <button onClick={handleTimerRun}>{timerButton}</button>
 
-          <button onClick={resetTimer}>
-            <ArrowPathIcon />
-            <span className="sr-only">Reset</span>
-          </button>
+            <button onClick={resetTimer} className={`iconButton`}>
+              <ArrowPathIcon />
+              <span className="sr-only">Reset</span>
+            </button>
+          </div>
 
           <div className={styles.timerSettingsWrapper}>
             <input

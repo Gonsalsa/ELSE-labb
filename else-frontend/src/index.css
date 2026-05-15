@@ -65,6 +65,19 @@ button,
   }
 }
 
+.iconButton {
+  --background-color: transparent;
+  --color-rgb: var(--secondary-rgb);
+
+  color: rgb(var(--color-rgb));
+  width: min-content;
+  min-width: min-content;
+
+  > svg:hover {
+    scale: 1.1;
+  }
+}
+
 .logo {
   color: #c8a44d;
   display: grid;

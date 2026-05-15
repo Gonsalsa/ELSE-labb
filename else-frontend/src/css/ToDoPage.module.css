@@ -42,12 +42,12 @@
   min-width: 100%;
   transition: min-width 0.3s ease;
 
-  &:has([type="text"]:focus-visible) {
+  &:has([type='text']:focus-visible) {
     border-bottom: 2px solid rgb(var(--foreground-primary-rgb));
   }
 }
 
-[type="text"] {
+[type='text'] {
   --color: rgb(var(--foreground-primary-rgb));
 
   background: transparent;
@@ -69,7 +69,7 @@
   }
 }
 
-[type="checkbox"] {
+[type='checkbox'] {
   display: none;
 
   + label {
@@ -77,7 +77,7 @@
     color: black;
 
     &:after {
-      content: "";
+      content: '';
       cursor: pointer;
       position: absolute;
       width: var(--icon-size);
@@ -99,16 +99,10 @@
   --background-color: transparent;
   --color-rgb: var(--warning-rgb);
 
-  color: rgb(var(--color-rgb));
   width: var(--button-size);
   min-width: var(--button-size);
-  height: var(--button-size);
-  overflow: hidden;
-
-  > svg:hover {
-    scale: 1.1;
-  }
 }
+
 .todopopup {
   position: fixed;
   inset: 0;
@@ -136,7 +130,7 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
   animation: popup 0.2s ease;
   border: 1px solid rgba(255, 255, 255, 0.05);
-  &:has([type="text"]:focus-visible) {
+  &:has([type='text']:focus-visible) {
     border-bottom: 2px solid rgb(var(--foreground-primary-rgb));
   }
 }
@@ -176,11 +170,26 @@
 }
 
 .timerWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
 }
 
 .timerClock {
   font-size: 96px;
   font-weight: bold;
+  line-height: 0.8;
+}
+
+.timerButtonWrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+
+  > :first-child {
+    grid-column: 2;
+  }
 }
 
 .timerSettingsWrapper {
