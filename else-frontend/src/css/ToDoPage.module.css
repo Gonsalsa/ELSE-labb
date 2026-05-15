@@ -204,8 +204,8 @@
   width: 100%;
 
   > * {
-    --background-color: var(--disabled-rgb);
-    --foreground-color: var(--foreground-disabled-rgb);
+    --background-color: var(--tertiary-rgb);
+    --foreground-color: var(--foreground-tertiary-rgb);
 
     width: 100%;
     border-radius: 0;
@@ -231,7 +231,7 @@
       --shadow-color: var(--secondary-rgb);
     }
     &:not(:checked):hover + label {
-      --foreground-color: var(--foreground-disabled-hover-rgb);
+      --foreground-color: var(--foreground-tertiary-hover-rgb);
     }
   }
 }

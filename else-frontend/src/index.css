@@ -3,17 +3,17 @@
   --bg-rgb: 18, 22, 33;
   --primary-rgb: 200, 164, 77;
   --secondary-rgb: 223, 207, 229;
+  --tertiary-rgb: 67, 71, 81;
 
   --success-rgb: 120, 196, 147;
   --warning-rgb: 225, 95, 81;
-  --disabled-rgb: 67, 71, 81;
   --wip-rgb: 255, 223, 118;
   --draft-rgb: 160, 165, 177;
 
   --foreground-primary-rgb: 242, 240, 228;
   --foreground-secondary-rgb: 51, 64, 97;
-  --foreground-disabled-rgb: 160, 165, 177;
-  --foreground-disabled-hover-rgb: 223, 207, 229;
+  --foreground-tertiary-rgb: 160, 165, 177;
+  --foreground-tertiary-hover-rgb: 223, 207, 229;
 
   /* Typography */
   --text-base: 16px;
