@@ -119,7 +119,6 @@ const ToDoPage = () => {
         setIntervalId(null)
 
         setTimerMinutes('00')
-        setTimerButton('Reset')
         return
       }
 
