@@ -13,6 +13,7 @@
   --foreground-primary-rgb: 242, 240, 228;
   --foreground-secondary-rgb: 51, 64, 97;
   --foreground-disabled-rgb: 160, 165, 177;
+  --foreground-disabled-hover-rgb: 223, 207, 229;
 
   /* Typography */
   --text-base: 16px;

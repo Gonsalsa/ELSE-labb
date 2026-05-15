@@ -231,7 +231,7 @@
       --shadow-color: var(--secondary-rgb);
     }
     &:not(:checked):hover + label {
-      --foreground-color: var(--secondary-rgb);
+      --foreground-color: var(--foreground-disabled-hover-rgb);
     }
   }
 }
