@@ -42,12 +42,12 @@
   min-width: 100%;
   transition: min-width 0.3s ease;
 
-  &:has([type='text']:focus-visible) {
+  &:has([type="text"]:focus-visible) {
     border-bottom: 2px solid rgb(var(--foreground-primary-rgb));
   }
 }
 
-[type='text'] {
+[type="text"] {
   --color: rgb(var(--foreground-primary-rgb));
 
   background: transparent;
@@ -69,7 +69,7 @@
   }
 }
 
-[type='checkbox'] {
+[type="checkbox"] {
   display: none;
 
   + label {
@@ -77,7 +77,7 @@
     color: black;
 
     &:after {
-      content: '';
+      content: "";
       cursor: pointer;
       position: absolute;
       width: var(--icon-size);
@@ -85,13 +85,13 @@
       left: 0;
       top: 50%;
       transform: translateY(-50%);
-      background: rgb(var(--success-rgb));
+      background: rgb(var(--draft-rgb));
       border-radius: 50%;
     }
   }
 
   &:checked + label::after {
-    background: rgb(var(--draft-rgb));
+    background: rgb(var(--success-rgb));
   }
 }
 
@@ -108,6 +108,71 @@
   > svg:hover {
     scale: 1.1;
   }
+}
+.todopopup {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 10rem;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+}
+
+.addTodoCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 35em;
+  height: 10em;
+  padding: 2em;
+  border-radius: var(--border-radius);
+  background: rgba(var(--secondary-rgb), 0.2);
+  gap: var(--gap);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  animation: popup 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  &:has([type="text"]:focus-visible) {
+    border-bottom: 2px solid rgb(var(--foreground-primary-rgb));
+  }
+}
+.addTodoCard input {
+  padding: 0.8rem 1rem;
+  border: none;
+  outline: none;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  font-size: 1rem;
+  height: 3rem;
+  width: 25rem;
+}
+.closeButton {
+  all: unset;
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: rgb(var(--warning-rgb));
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  background: rgb(var(--warning-rgb));
+  transform: scale(1.08);
 }
 
 .timerWrapper {

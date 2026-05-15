@@ -2,14 +2,15 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import ToDoItemCard from '../components/ToDoItemCard'
 import styles from '../css/ToDoPage.module.css'
-import { getToDos, updateToDo } from '../services/ToDoService'
+import { createTodo, getToDos, updateToDo } from '../services/ToDoService'
 import type { ToDo } from '../types/Type'
+import AddTodoModal from '../components/AddTodoModal'
 import { ArrowPathIcon } from '@heroicons/react/16/solid'
 
 type TimerSetting = 'work' | 'shortBreak' | 'longBreak'
 const ToDoPage = () => {
   const navigate = useNavigate()
-
+  const [open, setOpen] = useState<boolean>(false)
   const [toDos, setToDos] = useState<ToDo[]>([])
   const [dragId, setDragId] = useState<number | null>(null)
 
@@ -32,13 +33,13 @@ const ToDoPage = () => {
     navigate('/login')
   }
 
-  useEffect(() => {
-    const load = async () => {
-      const data = await getToDos()
-      setToDos(data)
-    }
+  const loadTodos = async () => {
+    const data = await getToDos()
+    setToDos(data)
+  }
 
-    load()
+  useEffect(() => {
+    loadTodos()
   }, [])
 
   const handleDelete = (id: number) => {
@@ -51,6 +52,19 @@ const ToDoPage = () => {
 
   const handleDragOver = (e: React.DragEvent<HTMLLIElement>) => {
     e.preventDefault()
+  }
+
+  const handelOpen = () => {
+    setOpen(true)
+  }
+
+  const handleCreatTodo = async (title: string) => {
+    const newTodo = await createTodo(title)
+
+    if (newTodo) {
+      await loadTodos()
+      setOpen(false)
+    }
   }
 
   const handleDrop = async (toIndex: number) => {
@@ -227,6 +241,13 @@ const ToDoPage = () => {
             </li>
           ))}
         </ul>
+        <button onClick={handelOpen}>+</button>
+        {open && (
+          <AddTodoModal
+            onClose={() => setOpen(false)}
+            onCreate={handleCreatTodo}
+          />
+        )}
       </main>
     </>
   )
