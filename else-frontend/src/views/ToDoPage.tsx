@@ -15,7 +15,7 @@ const ToDoPage = () => {
   const [dragId, setDragId] = useState<number | null>(null)
 
   const timerSettings: Record<TimerSetting, number> = {
-    work: 1,
+    work: 25,
     shortBreak: 5,
     longBreak: 15,
   }
@@ -39,7 +39,11 @@ const ToDoPage = () => {
   }
 
   useEffect(() => {
-    loadTodos()
+    const initToDos = async () => {
+      loadTodos()
+    }
+
+    initToDos()
   }, [])
 
   const handleDelete = (id: number) => {
@@ -58,7 +62,7 @@ const ToDoPage = () => {
     setOpen(true)
   }
 
-  const handleCreatTodo = async (title: string) => {
+  const handleCreateTodo = async (title: string) => {
     const newTodo = await createTodo(title)
 
     if (newTodo) {
@@ -245,7 +249,7 @@ const ToDoPage = () => {
         {open && (
           <AddTodoModal
             onClose={() => setOpen(false)}
-            onCreate={handleCreatTodo}
+            onCreate={handleCreateTodo}
           />
         )}
       </main>
