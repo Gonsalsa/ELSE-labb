@@ -238,8 +238,8 @@ const ToDoPage = () => {
         </div>
 
         <div className={styles.toDoListWrapper}>
-          {hasTodos && (
-            <div className={styles.toDoListRail}>
+          <div className={styles.toDoListRail}>
+            {hasTodos && (
               <ul className={styles.toDoList}>
                 {toDos.map((toDoItem, index) => (
                   <li
@@ -253,35 +253,34 @@ const ToDoPage = () => {
                   </li>
                 ))}
               </ul>
-            </div>
-          )}
-
-          <div className={styles.addButtonOverlay}>
-            {!hasTodos && (
-              <>
-                <p>
-                  There's always something to do.
-                  <br />
-                  Let's add som tasks!
-                </p>
-              </>
             )}
-            <button
-              onClick={handelOpen}
-              className={`iconButton ${styles.addButton}`}
-            >
-              <PlusCircleIcon />
-            </button>
+
+            <div className={styles.addButtonOverlay}>
+              {!hasTodos && (
+                <>
+                  <p>
+                    There's always something to do.
+                    <br />
+                    Let's add som tasks!
+                  </p>
+                </>
+              )}
+              <button
+                onClick={handelOpen}
+                className={`iconButton ${styles.addButton}`}
+              >
+                <PlusCircleIcon />
+              </button>
+            </div>
           </div>
         </div>
-
-        {open && (
-          <AddTodoModal
-            onClose={() => setOpen(false)}
-            onCreate={handleCreateTodo}
-          />
-        )}
       </main>
+
+      <AddTodoModal
+        onCreate={handleCreateTodo}
+        onClose={() => setOpen(false)}
+        open={open}
+      />
     </>
   )
 }
