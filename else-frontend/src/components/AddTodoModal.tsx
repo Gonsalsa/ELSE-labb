@@ -33,12 +33,16 @@ const AddTodoModal = ({ onCreate, onClose, open }: AddTodoProps) => {
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
+    e.stopPropagation()
+
     if (e.key === 'Escape') {
       onClose()
+      console.log('hello')
     }
 
     if (e.key === 'Enter') {
       handleSave()
+      console.log('hello')
     }
   }
 
@@ -51,18 +55,15 @@ const AddTodoModal = ({ onCreate, onClose, open }: AddTodoProps) => {
           ref={dialogRef}
           className={`overlay`}
           onClick={handleBackdropClick}
-          onKeyDown={handleKeyDown}
+          onKeyDown={(e) => handleKeyDown(e)}
         >
-          <div
-            className={styles.addTodoCard}
-            onClick={(e) => e.stopPropagation()}
-          >
+          <div className={styles.addTodoCard}>
             <input
               placeholder="Add new task"
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              onKeyDown={handleKeyDown}
+              onKeyDown={(e) => handleKeyDown(e)}
               autoFocus
             />
             <div>

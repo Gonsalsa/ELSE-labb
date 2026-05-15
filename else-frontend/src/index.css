@@ -84,18 +84,19 @@ button,
 }
 
 .overlay {
+  all: unset;
   inset: 0;
-  width: 100%;
-  height: 100%;
+  max-width: 100vw;
+  border: transparent;
+
   display: grid;
   place-items: center;
   background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(4px);
-  z-index: 999;
 }
 
 .logo {
-  color: #c8a44d;
+  color: rgb(var(--primary-rgb));
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   width: max-content;
