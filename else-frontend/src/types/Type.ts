@@ -18,3 +18,5 @@ export type LoginInputField = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   type?: string
 }
+
+export type TimerSetting = 'work' | 'shortBreak' | 'longBreak'

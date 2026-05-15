@@ -3,11 +3,10 @@ import { useNavigate } from 'react-router'
 import ToDoItemCard from '../components/ToDoItemCard'
 import styles from '../css/ToDoPage.module.css'
 import { createTodo, getToDos, updateToDo } from '../services/ToDoService'
-import type { ToDo } from '../types/Type'
+import type { TimerSetting, ToDo } from '../types/Type'
 import AddTodoModal from '../components/AddTodoModal'
 import { ArrowPathIcon } from '@heroicons/react/16/solid'
 
-type TimerSetting = 'work' | 'shortBreak' | 'longBreak'
 const ToDoPage = () => {
   const navigate = useNavigate()
   const [open, setOpen] = useState<boolean>(false)
