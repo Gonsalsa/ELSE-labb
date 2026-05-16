@@ -37,12 +37,10 @@ const AddTodoModal = ({ onCreate, onClose, open }: AddTodoProps) => {
 
     if (e.key === 'Escape') {
       onClose()
-      console.log('hello')
     }
 
     if (e.key === 'Enter') {
       handleSave()
-      console.log('hello')
     }
   }
 

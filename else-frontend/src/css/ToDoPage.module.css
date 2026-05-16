@@ -9,10 +9,6 @@
   overflow: hidden;
 
   display: grid;
-
-  > * {
-    margin-inline: 16px;
-  }
 }
 
 /* Timer */
@@ -22,6 +18,7 @@
   align-items: center;
   gap: 25px;
   max-width: var(--max-width);
+  margin-inline: 16px;
 }
 
 .timerClock {
@@ -91,6 +88,7 @@
   min-height: var(--_wrapper-min-height);
   flex: 1;
   position: relative;
+  margin-inline: 16px;
 }
 
 .toDoListRail {
@@ -295,11 +293,12 @@
   .toDoPageWrapper {
     max-height: calc(100vh - var(--_margin-box) * 2);
     margin: var(--_margin-box) auto;
+  }
 
-    > * {
-      margin-inline: auto;
-      width: 100%;
-    }
+  .timerWrapper,
+  .toDoListWrapper {
+    margin-inline: auto;
+    width: 100%;
   }
 }
 
