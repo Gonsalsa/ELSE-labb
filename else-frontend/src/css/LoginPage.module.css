@@ -1,6 +1,12 @@
 .LoginPageWrapper {
   margin: 0 auto;
-  max-width: 438px;
+  max-width: var(--max-width);
+}
+
+@media (min-width: 438px) {
+  .LoginPageWrapper {
+    margin: 40px 80px;
+  }
 }
 
 .loginForm {
@@ -8,6 +14,7 @@
   flex-direction: column;
   gap: 25px;
   place-items: end;
+  margin-top: 50px;
 }
 
 .loginInput {

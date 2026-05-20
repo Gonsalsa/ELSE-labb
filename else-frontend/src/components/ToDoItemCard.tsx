@@ -73,7 +73,10 @@ const ToDoItemCard = ({
           </label>
         </div>
 
-        <button className={styles.deleteButton} onClick={handleDelete}>
+        <button
+          className={`iconButton ${styles.deleteButton}`}
+          onClick={handleDelete}
+        >
           <TrashIcon />
           <span className="sr-only">Delete</span>
         </button>

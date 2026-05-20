@@ -3,16 +3,17 @@
   --bg-rgb: 18, 22, 33;
   --primary-rgb: 200, 164, 77;
   --secondary-rgb: 223, 207, 229;
+  --tertiary-rgb: 67, 71, 81;
 
   --success-rgb: 120, 196, 147;
   --warning-rgb: 225, 95, 81;
-  --disabled-rgb: 67, 71, 81;
   --wip-rgb: 255, 223, 118;
   --draft-rgb: 160, 165, 177;
 
   --foreground-primary-rgb: 242, 240, 228;
   --foreground-secondary-rgb: 51, 64, 97;
-  --foreground-disabled-rgb: 160, 165, 177;
+  --foreground-tertiary-rgb: 160, 165, 177;
+  --foreground-tertiary-hover-rgb: 223, 207, 229;
 
   /* Typography */
   --text-base: 16px;
@@ -24,47 +25,83 @@
   --padding-sm: 10px;
   --padding-md: 20px;
   --icon-size: 20px;
+  --max-width: 438px;
 }
 
 * {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 body {
   font-family: Arial, Helvetica, sans-serif;
   background: rgb(var(--bg-rgb));
   color: rgb(var(--foreground-primary-rgb));
+  padding: 16px;
 }
 
-button {
-  --background-color: var(--primary-rgb);
+button,
+.button {
+  --_background-color: var(--primary-rgb);
+  --_foreground-color: var(--foreground-primary-rgb);
+  --_shadow-color: var(--_background-color);
+  --padding-block: var(--padding-xs);
+  --padding-inline: var(--padding-sm);
 
-  background: rgb(var(--background-color));
+  background: rgb(var(--_background-color));
   border-radius: var(--border-radius);
-  color: rgb(var(--foreground-primary-rgb));
+  color: rgb(var(--_foreground-color));
   font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: var(--padding-xs) var(--padding-sm);
+  padding: var(--padding-block) var(--padding-inline);
   border: var(--border-width) var(--primary);
   min-width: 133px;
   font-size: var(--text-base);
   cursor: pointer;
 
   &:hover {
-    box-shadow: 0 5px 20px rgba(var(--background-color), 0.3);
-    scale: 0.99;
-  }
-
-  > svg {
-    width: var(--icon-size);
-    height: var(--icon-size);
+    box-shadow: 0 5px 20px rgba(var(--_shadow-color), 0.3);
+    scale: 1.01;
   }
 }
 
+.iconButton {
+  --_background-color: transparent;
+  --_color-rgb: var(--secondary-rgb);
+  --_icon-size: var(--icon-size);
+
+  color: rgb(var(--_color-rgb));
+  width: min-content;
+  min-width: unset;
+
+  &:hover {
+    scale: 1.05;
+  }
+
+  > svg {
+    width: var(--_icon-size);
+    height: var(--_icon-size);
+  }
+}
+
+.overlay {
+  all: unset;
+  inset: 0;
+  max-width: 100vw;
+  padding: 16px;
+  border: transparent;
+
+  display: grid;
+  place-items: center;
+  background: rgba(var(--bg-rgb), 0.8);
+  backdrop-filter: blur(10px);
+}
+
 .logo {
-  color: #c8a44d;
+  color: rgb(var(--primary-rgb));
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   width: max-content;
